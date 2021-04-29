@@ -2,6 +2,7 @@ import { Application } from "https://deno.land/x/oak/mod.ts";
 import router from "./routes/routes.ts";
 import { fetchAPI } from "./fetch/apiFetching.ts";
 import { parse } from 'https://deno.land/std/flags/mod.ts';
+import { oakCors } from "https://deno.land/x/cors/mod.ts";
 
 const { args } = Deno;
 const DEFAULT_PORT = 8000;
@@ -11,6 +12,7 @@ console.log("\nrunning server...");
 
 const app = new Application();
 
+app.use(oakCors());
 app.use(router.routes());
 
 console.log("starting scraping server...")
