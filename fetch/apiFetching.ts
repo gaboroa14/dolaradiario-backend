@@ -66,27 +66,27 @@ const fetchAPI = () => {
       body: JSON.stringify({ coins: ["PTR"], fiats: ["USD", "BS"] }),
     });
 
-    ptr.then((response) => {
-      return response.json();
-    }).then(async (data) => {
-      const valor: any = data.data.PTR;
-      const p: number = Math.round((valor?.BS / valor?.USD) * 100) / 100;
-      const old_petro = await getLastPetroPrice();
-      old_petro.petro !== p
-        ? await insertNewPrice(
-          new Price(
-            0,
-            p,
-            ID.PETRO,
-            new Date(),
-            "a",
-          ),
-        )
-        : console.log("Petro is up to date");
-    });
-  } catch (error) {
-    console.log(`error fetching Petro data: ${error}`);
-  }
+  //   ptr.then((response) => {
+  //     return response.json();
+  //   }).then(async (data) => {
+  //     const valor: any = data.data.PTR;
+  //     const p: number = Math.round((valor?.BS / valor?.USD) * 100) / 100;
+  //     const old_petro = await getLastPetroPrice();
+  //     old_petro.petro !== p
+  //       ? await insertNewPrice(
+  //         new Price(
+  //           0,
+  //           p,
+  //           ID.PETRO,
+  //           new Date(),
+  //           "a",
+  //         ),
+  //       )
+  //       : console.log("Petro is up to date");
+  //   });
+  // } catch (error) {
+  //   console.log(`error fetching Petro data: ${error}`);
+  // }
 
   try {
     simple_twitter.get("search/tweets", params, async function (
