@@ -1,0 +1,1 @@
+web: deno run --allow-net --allow-env --unstable index.ts --port=${PORT}
