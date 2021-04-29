@@ -10,7 +10,6 @@ router
   .get("/providers/:id", getProvider)
   .get("/prices", getPrices)
   .get("/main", getIndex)
-  .post("/prices", insertPrices)
   .get("/", (ctx) => {
     ctx.response.body = "¿Qué se te perdió, cachorro? Si quieres ver el precio del dólar entra a https://dolaradiar.io jiji"
   });
