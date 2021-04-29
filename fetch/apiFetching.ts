@@ -19,7 +19,7 @@ const params = {
 
 const fetchAPI = () => {
   console.log(
-    `${new Date()} | checking for new DolarToday, BCV, MonitorDolar and Petro prices...`,
+    `${new Date().toLocaleString("en-US", {timeZone: "America/Caracas", day: "numeric", month: "numeric", year: "numeric", hour: "numeric", minute: "numeric"})} | checking for new DolarToday, BCV, MonitorDolar and Petro prices...`,
   );
   let precio: string = "";
   try {
@@ -36,7 +36,7 @@ const fetchAPI = () => {
             0,
             parseFloat(data?.USD.transferencia),
             ID.DOLARTODAY,
-            new Date(),
+            new Date().toLocaleString("en-US", {timeZone: "America/Caracas"}),
             "a",
           ),
         )
@@ -47,7 +47,7 @@ const fetchAPI = () => {
             0,
             parseFloat(data?.USD.promedio_real),
             ID.BCV,
-            new Date(),
+            new Date().toLocaleString("en-US", {timeZone: "America/Caracas"}),
             "a",
           ),
         )
@@ -78,7 +78,7 @@ const fetchAPI = () => {
   //           0,
   //           p,
   //           ID.PETRO,
-  //           new Date(),
+  //           new Date().toLocaleString("en-US", {timeZone: "America/Caracas"}),
   //           "a",
   //         ),
   //       )
@@ -123,7 +123,7 @@ const fetchAPI = () => {
               0,
               precioFloat,
               ID.MONITORDOLAR,
-              new Date(),
+              new Date().toLocaleString("en-US", {timeZone: "America/Caracas"}),
               "a",
             ),
           )
@@ -131,7 +131,7 @@ const fetchAPI = () => {
       }
     });
   } catch (error) {
-    console.log(`error fetchin MonitorDolar price: ${error}`);
+    console.log(`error fetching MonitorDolar price: ${error}`);
   }
 
   const ahorita: Date = new Date();
