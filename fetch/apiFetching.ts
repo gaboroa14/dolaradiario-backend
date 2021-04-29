@@ -135,8 +135,7 @@ const fetchAPI = () => {
   }
 
   const ahorita: Date = new Date();
-  console.log(ahorita.getHours())
-  if (ahorita.getHours() < 22) {
+  if (ahorita.getHours() < 2) {
     const time: number = new Date(
       ahorita.getFullYear(),
       ahorita.getMonth(),
