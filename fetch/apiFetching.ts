@@ -36,7 +36,7 @@ const fetchAPI = () => {
             0,
             parseFloat(data?.USD.transferencia),
             ID.DOLARTODAY,
-            new Date().toLocaleString("en-US", {timeZone: "America/Caracas"}),
+            new Date(),
             "a",
           ),
         )
@@ -47,7 +47,7 @@ const fetchAPI = () => {
             0,
             parseFloat(data?.USD.promedio_real),
             ID.BCV,
-            new Date().toLocaleString("en-US", {timeZone: "America/Caracas"}),
+            new Date(),
             "a",
           ),
         )
@@ -78,7 +78,7 @@ const fetchAPI = () => {
   //           0,
   //           p,
   //           ID.PETRO,
-  //           new Date().toLocaleString("en-US", {timeZone: "America/Caracas"}),
+  //           new Date(),
   //           "a",
   //         ),
   //       )
@@ -123,7 +123,7 @@ const fetchAPI = () => {
               0,
               precioFloat,
               ID.MONITORDOLAR,
-              new Date().toLocaleString("en-US", {timeZone: "America/Caracas"}),
+              new Date(),
               "a",
             ),
           )
