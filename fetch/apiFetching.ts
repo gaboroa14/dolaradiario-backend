@@ -57,14 +57,14 @@ const fetchAPI = () => {
     console.log(`error fetching BCV and DolarToday data: ${error}`);
   }
 
-  try {
-    const ptr: Promise<Response> = fetch(PETRO_API, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ coins: ["PTR"], fiats: ["USD", "BS"] }),
-    });
+  // try {
+  //   const ptr: Promise<Response> = fetch(PETRO_API, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ coins: ["PTR"], fiats: ["USD", "BS"] }),
+  //   });
 
   //   ptr.then((response) => {
   //     return response.json();
