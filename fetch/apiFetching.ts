@@ -135,17 +135,25 @@ const fetchAPI = () => {
   }
 
   const ahorita: Date = new Date();
-  const time: number = new Date(
-    ahorita.getFullYear(),
-    ahorita.getMonth(),
-    ahorita.getDate(),
-    (ahorita.getMinutes() > 35) ? ahorita.getHours() + 1 : ahorita.getHours(),
-    (ahorita.getMinutes() > 35) ? 5 : 35,
-    ahorita.getSeconds(),
-    ahorita.getMilliseconds(),
-  ).getTime() - ahorita.getTime();
-  console.log(`finished fetching, sleeping for ${Math.round(time / 60000)} min...`);
-  setTimeout(fetchAPI, time);
+  if (ahorita.getHours() < 10) {
+    const time: number = new Date(
+      ahorita.getFullYear(),
+      ahorita.getMonth(),
+      ahorita.getDate(),
+      (ahorita.getMinutes() >= 35)
+        ? ahorita.getHours() + 1
+        : ahorita.getHours(),
+      (ahorita.getMinutes() >= 35) ? 5 : 35,
+      ahorita.getSeconds(),
+      ahorita.getMilliseconds(),
+    ).getTime() - ahorita.getTime();
+    console.log(
+      `finished fetching, sleeping for ${Math.round(time / 60000)} min...`,
+    );
+    setTimeout(fetchAPI, time);
+  } else {
+    console.log('its 10 pm, going to sleep...');
+  }
 };
 
 export { fetchAPI };
