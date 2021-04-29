@@ -9,7 +9,7 @@ import Price from "../models/Price.ts";
 import SimpleTwitter from "https://deno.land/x/simple_twitter_deno@0.05/simple_twitter_deno.ts";
 import "https://deno.land/x/dotenv/load.ts";
 
-const simple_twitter = new SimpleTwitter(JSON.parse(Deno.env.toObject().TWITTER)));
+const simple_twitter = new SimpleTwitter(JSON.parse(Deno.env.toObject().TWITTER));
 
 const params = {
   q: "from:monitordolarvla",
