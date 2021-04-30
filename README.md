@@ -6,7 +6,7 @@ Backend for the backend server of Dolar a Diario, a platform to check for the cu
 
 Make sure you config a PostgreSQL Database in config/database.ts. Also, configure a valid Twitter Developer API credentials object in fetch/apiFetching.ts. Then, run as follow:
 
-`deno run --allow-net --allow-read --allow-env --unstable index.ts --port=${PORT}`
+`deno run --allow-net --allow-read --allow-env --unstable index.ts`
 
 ## How it works
 
