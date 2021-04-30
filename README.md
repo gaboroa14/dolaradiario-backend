@@ -1,6 +1,14 @@
 # dolaradiario-backend
 
-Backend for the backend server of Dolar a Diario, a platform to check for the current Venezuelan price as reported by three different sources: DolarToday, BCV and MonitorDolar. Allows also for Petro integration but it's disabled by default.
+Backend server of Dolar a Diario, a platform to check for the current Venezuelan price as reported by three different sources: DolarToday, BCV and MonitorDolar. Allows also for Petro integration but it's disabled by default.
+
+## Used technologies
+
+- Deno v1.9.0
+- Postgres client for Deno
+- Oak
+- SimpleTwitter
+- Heroku for deployment
 
 ## How to run
 
