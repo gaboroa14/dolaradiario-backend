@@ -20,13 +20,14 @@ export async function getHistory(ctx: any) {
   const prices: Price[] = await getLastMonthPrices();
   const providers: RepositoryResponse = await getAllProviders();
   const response: any = providers.data.map((provider: Provider) => {
+    if (provider.id !== 5){
     return {
       provider: provider.description,
       prices: prices.filter((price: Price) => price.provider_id === provider.id)
         .map((price: Price) => {
           return { price: price.value, date: price.date.toLocaleString("es-VE", {timeZone: "America/Caracas", year: 'numeric', month: 'numeric', day: 'numeric'}) };
         }),
-    };
+    };}
   });
   ctx.response.body = new RepositoryResponse(
     "200",
