@@ -44,7 +44,7 @@ export async function getLastMonthPrices() : Promise<Price[]>{
       FROM price
       WHERE date >= now()- interval '1' month
         and date <= now()
-      ORDER BY provider_id, date
+      ORDER BY provider_id, date DESC
       `,
     );
     const prices : Price[] = result.rows.map((price : any) => 

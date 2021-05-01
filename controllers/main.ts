@@ -23,7 +23,7 @@ export async function getHistory(ctx: any) {
     return {
       provider: provider.id,
       prices: prices.filter((price: Price) => price.provider_id === provider.id)
-        .map((price: Price) => {
+        .find((price: Price) => {
           return { price: price.value, date: price.date.toLocaleString("es-VE", {timeZone: "America/Caracas", year: 'numeric', month: 'numeric', day: 'numeric'}) };
         }),
     };
