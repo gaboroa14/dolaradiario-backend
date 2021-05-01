@@ -34,12 +34,14 @@ export async function getHistory(ctx: any) {
           }),
         };
       });
-    const preciosSinDuplicado: any[] = preciosConDuplicado.filter((
-      price: Price,
+    const preciosSinDuplicado: any[] = preciosConDuplicado.map((
+      price: any,
     ) =>
-      preciosSinDuplicado.findIndex((p: Price) => {
+      {if (preciosSinDuplicado.findIndex((p: any) => {
         price.date === p.date;
-      }) === -1
+      }) === -1) {
+        return price
+      }}
     );
     return {
       provider: provider.id,
