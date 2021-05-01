@@ -47,9 +47,9 @@ export async function getLastMonthPrices() : Promise<Price[]>{
       ORDER BY provider_id, date
       `,
     );
-    const prices : Price[] = result.rows.map((price : any) => {
+    const prices : Price[] = result.rows.map((price : any) => 
       new Price(-1, price.price_value,price.provider_id, price.date,'a')
-    })
+    )
     return prices;
   } catch (error) {
     console.log(error);
