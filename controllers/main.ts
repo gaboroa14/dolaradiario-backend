@@ -21,7 +21,7 @@ export async function getHistory(ctx: any) {
   const providers: RepositoryResponse = await getAllProviders();
   const response: any = providers.data.map((provider: Provider) => {
     return {
-      provider: provider.id,
+      provider: provider.description,
       prices: prices.filter((price: Price) => price.provider_id === provider.id)
         .map((price: Price) => {
           return { price: price.value, date: price.date.toLocaleString("es-VE", {timeZone: "America/Caracas", year: 'numeric', month: 'numeric', day: 'numeric'}) };
