@@ -5,7 +5,7 @@ import client from "../config/database.ts";
 export async function getAllProviders(): Promise<RepositoryResponse> {
   try {
     const result = await client.queryArray(
-      "SELECT * FROM provider WHERE status='a'",
+      "SELECT * FROM provider WHERE status='a' ORDER BY id",
     );
     const providers: Provider[] = result.rows.map((provider: any) => {
       return new Provider(
