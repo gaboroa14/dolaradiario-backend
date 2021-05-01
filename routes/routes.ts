@@ -1,7 +1,7 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
-import { getProviders, getProvider } from "../controllers/providers.ts";
-import { getPrices } from "../controllers/prices.ts";
-import { getIndex, getHistory } from "../controllers/main.ts";
+import { getProviders, getProvider } from "../services/providersServices.ts";
+import { getPrices } from "../services/pricesServices.ts";
+import { getIndex, getHistory } from "../services/mainServices.ts";
 
 const router: Router = new Router();
 
