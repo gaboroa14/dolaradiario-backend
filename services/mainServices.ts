@@ -29,6 +29,7 @@ export async function getHistory(ctx: any) {
         }),
     };}
   });
+  response.pop();
   ctx.response.body = new RepositoryResponse(
     "200",
     true,
