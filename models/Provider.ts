@@ -17,7 +17,7 @@ class Provider {
     this.url = _url;
     this.logo = _logo;
     this.status = _status;
-  };
+  }
 }
 
 export default Provider;

@@ -36,3 +36,23 @@ export async function getLastPricesByAllProviders(): Promise<
   }
   return [];
 }
+
+export async function getLastMonthPrices() : Promise<Price[]>{
+  try {
+    const result: any = await client.queryObject(
+      `SELECT price_value, date, provider_id
+      FROM price
+      WHERE date >= now()- interval '1' month
+        and date <= now()
+      ORDER BY provider_id, date
+      `,
+    );
+    const prices : Price[] = result.map((price : any) => {
+      new Price(-1, price.price_value,price.provider_id, price.date,'a')
+    })
+    return prices;
+  } catch (error) {
+    console.log(error);
+  }
+  return [];
+}
