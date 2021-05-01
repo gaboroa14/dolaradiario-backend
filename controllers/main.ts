@@ -17,7 +17,7 @@ export async function getHistory(ctx: any){
   const prices : Price[] = await getLastMonthPrices();
   const providers : RepositoryResponse = await getAllProviders();
   const response : any = providers.data.map((provider : Provider) => {
-    prices.filter((price : Price) => price.provider_id = provider.id)
+    return{provider: provider.id, prices: prices.filter((price : Price) => price.provider_id = provider.id)}
   })
   ctx.response.body = new RepositoryResponse("500", true, 
     response, "Éxito consultando");

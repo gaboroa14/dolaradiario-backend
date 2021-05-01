@@ -1,7 +1,7 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import { getProviders, getProvider } from "../controllers/providers.ts";
 import { getPrices } from "../controllers/prices.ts";
-import { getIndex } from "../controllers/main.ts";
+import { getIndex, getHistory } from "../controllers/main.ts";
 
 const router: Router = new Router();
 
@@ -10,6 +10,7 @@ router
   .get("/providers/:id", getProvider)
   .get("/prices", getPrices)
   .get("/main", getIndex)
+  .get("/history", getHistory)
   .get("/", (ctx) => {
     ctx.response.body = "¿Qué se te perdió, cachorro? Si quieres ver el precio del dólar entra a https://dolaradiar.io jiji"
   });
