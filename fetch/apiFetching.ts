@@ -140,10 +140,10 @@ const fetchAPI = () => {
       ahorita.getFullYear(),
       ahorita.getMonth(),
       ahorita.getDate(),
-      (ahorita.getMinutes() >= 32)
+      (ahorita.getMinutes() >= 35)
         ? ahorita.getHours() + 1
         : ahorita.getHours(),
-      (ahorita.getMinutes() >= 32) ? 2 : 32,
+      (ahorita.getMinutes() >= 35) ? 5 : 35,
       ahorita.getSeconds(),
       ahorita.getMilliseconds(),
     ).getTime() - ahorita.getTime();
