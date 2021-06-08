@@ -152,7 +152,7 @@ const fetchAPI = () => {
     );
     setTimeout(fetchAPI, time);
   } else {
-    console.log('its 10 pm, going to sleep for 9 hours...\nsee you at 7 am!');
+    console.log('its 10 pm, going to sleep for 9 hours...\nsee you at 7 am!!');
     setTimeout(fetchAPI,32400000)
   }
 };
