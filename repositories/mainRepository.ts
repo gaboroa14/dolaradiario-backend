@@ -48,7 +48,7 @@ export async function getLastMonthPrices(): Promise<Price[]> {
       `,
     );
     const prices: Price[] = result.rows.map((price: any) => {
-      if (price.date.substr(3) == "09/2021") price.price_value = price.price_value / 1000000
+      if (price.date.substr(3) == "9/2021") price.price_value = price.price_value / 1000000
       return new Price(-1, price.price_value, price.provider_id, price.date, "a");
     });
     return prices;
