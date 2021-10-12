@@ -25,7 +25,9 @@ export async function getHistory(ctx: any) {
       provider: provider.description,
       prices: prices.filter((price: Price) => price.provider_id === provider.id)
         .map((price: Price) => {
-          return { price: price.value, date: price.date.toLocaleString("es-VE", {timeZone: "America/Caracas", year: 'numeric', month: 'numeric', day: 'numeric'}) };
+          const fecha : string = price.date.toLocaleString("es-VE", {timeZone: "America/Caracas", year: 'numeric', month: 'numeric', day: 'numeric'});
+          if (fecha.substr(3) == "9/2021") price.value = Math.round(price.value / 10000)/100;
+          return { price: price.value, date: fecha};
         }),
     };}
   });
