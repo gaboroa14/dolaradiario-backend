@@ -12,6 +12,7 @@ export async function getLastPricesByAllProviders(): Promise<
       (
       select provider_id, price_value, date, status, price_id, row_number() over(partition by provider_id order by price_id desc, provider_id) as rn
       from price
+      where status = 'a'
       ) t
       where rn = 1
       `,
