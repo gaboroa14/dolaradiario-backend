@@ -1,4 +1,4 @@
-import { Client } from "https://deno.land/x/postgres/mod.ts";
+import { Client } from "https://deno.land/x/postgres@v0.14.2/mod.ts";
 
 console.log("connecting to database...")
 
