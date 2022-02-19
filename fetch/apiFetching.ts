@@ -28,7 +28,8 @@ const fetchAPI = () => {
     atm.then((response) => {
       return response.json();
     }).then(async (data) => {
-      const old_price = await getLastAirTMPrice();
+      try{
+        const old_price = await getLastAirTMPrice();
       const airTMNew: number = parseFloat(data?.buy);
       old_price['airtm'] !== airTMNew ? 
       await insertNewPrice(
@@ -40,36 +41,45 @@ const fetchAPI = () => {
           'a'
         )
       ) : console.log("AirTM is up to date"); 
+    } catch (error) {
+      console.log("AirTM is down");
+      console.log(error);
+    }
     })
     const dt: Promise<Response> = fetch(DOLAR_TODAY_API);
     dt.then((response) => {
       return response.json();
     }).then(async (data) => {
-      const old_prices = await getLastPrices();
-      const dolarTodayNew: number = parseFloat(data?.USD.transferencia);
-      const BCVNew: number = parseFloat(data?.USD.promedio_real);
-      old_prices.dolarToday !== dolarTodayNew
-        ? await insertNewPrice(
-          new Price(
-            0,
-            parseFloat(data?.USD.transferencia),
-            ID.DOLARTODAY,
-            new Date(),
-            "a",
-          ),
-        )
-        : console.log("DolarToday is up to date");
-      old_prices.BCV !== BCVNew
-        ? await insertNewPrice(
-          new Price(
-            0,
-            parseFloat(data?.USD.promedio_real),
-            ID.BCV,
-            new Date(),
-            "a",
-          ),
-        )
-        : console.log("BCV is up to date");
+      try {
+        const old_prices = await getLastPrices();
+        const dolarTodayNew: number = parseFloat(data?.USD.transferencia);
+        const BCVNew: number = parseFloat(data?.USD.promedio_real);
+        old_prices.dolarToday !== dolarTodayNew
+          ? await insertNewPrice(
+            new Price(
+              0,
+              parseFloat(data?.USD.transferencia),
+              ID.DOLARTODAY,
+              new Date(),
+              "a",
+            ),
+          )
+          : console.log("DolarToday is up to date");
+        old_prices.BCV !== BCVNew
+          ? await insertNewPrice(
+            new Price(
+              0,
+              parseFloat(data?.USD.promedio_real),
+              ID.BCV,
+              new Date(),
+              "a",
+            ),
+          )
+          : console.log("BCV is up to date");
+      } catch (error) {
+        console.log("DolarToday API is down");
+        console.log(error);
+      }
     });
   } catch (error) {
     console.log(`error fetching BCV, DolarToday and AirTM data: ${error}`);
