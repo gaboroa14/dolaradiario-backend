@@ -1,7 +1,8 @@
-import { DOLAR_TODAY_API, ID, PETRO_API } from "../config/config.ts";
+import { DOLAR_TODAY_API, ID, AIRTM_API } from "../config/config.ts";
 import {
   getLastMonitorDolarPrice,
   getLastPetroPrice,
+  getLastAirTMPrice,
   getLastPrices,
   insertNewPrice,
 } from "../repositories/pricesRepository.ts";
@@ -23,6 +24,23 @@ const fetchAPI = () => {
   );
   let precio: string = "";
   try {
+    const atm: Promise<Response> = fetch(AIRTM_API);
+    atm.then((response) => {
+      return response.json();
+    }).then(async (data) => {
+      const old_price = await getLastAirTMPrice();
+      const airTMNew: number = parseFloat(data?.buy);
+      old_price['airtm'] !== airTMNew ? 
+      await insertNewPrice(
+        new Price(
+          0,
+          airTMNew,
+          ID.AIRTM,
+          new Date(),
+          'a'
+        )
+      ) : console.log("AirTM is up to date"); 
+    })
     const dt: Promise<Response> = fetch(DOLAR_TODAY_API);
     dt.then((response) => {
       return response.json();
@@ -54,7 +72,7 @@ const fetchAPI = () => {
         : console.log("BCV is up to date");
     });
   } catch (error) {
-    console.log(`error fetching BCV and DolarToday data: ${error}`);
+    console.log(`error fetching BCV, DolarToday and AirTM data: ${error}`);
   }
 
   // try {

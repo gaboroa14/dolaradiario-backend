@@ -47,6 +47,17 @@ export async function getLastPetroPrice(): Promise<{ petro: number }> {
   return { petro: valor_ptr };
 }
 
+export async function getLastAirTMPrice(): Promise<{ airtm: number }> {
+  const result_airtm: any = await client.queryObject(
+    `SELECT price_value FROM price WHERE provider_id = ${ID.AIRTM} AND status='a' ORDER BY price_id DESC LIMIT 1`,
+  );
+  let valor_airtm: number;
+  result_airtm.rows.length !== 0
+    ? valor_airtm = parseFloat(result_airtm?.rows[0].price_value)
+    : valor_airtm = 0;
+  return { airtm: valor_airtm };
+}
+
 export async function getLastMonitorDolarPrice(): Promise<{ monitor: number }> {
   const result_md: any = await client.queryObject(
     `SELECT price_value FROM price WHERE provider_id = ${ID.MONITORDOLAR} AND status='a' ORDER BY price_id DESC LIMIT 1`,
@@ -59,7 +70,7 @@ export async function getLastMonitorDolarPrice(): Promise<{ monitor: number }> {
 }
 
 export async function getLastPrices(): Promise<
-  { dolarToday: number; BCV: number }
+  { dolarToday: number; BCV: number; airTM: number }
 > {
   try {
     const result_dt: any = await client.queryObject(
@@ -78,9 +89,17 @@ export async function getLastPrices(): Promise<
       ? valor_bcv = parseFloat(result_bcv?.rows[0].price_value)
       : valor_bcv = 0;
 
-    return { dolarToday: valor_dt, BCV: valor_bcv };
+    const result_airtm: any = await client.queryObject(
+      `SELECT price_value FROM price WHERE provider_id = ${ID.AIRTM} AND status='a' ORDER BY price_id DESC LIMIT 1`,
+    );
+    let valor_airtm: number;
+    result_airtm.rows.length !== 0
+      ? valor_airtm = parseFloat(result_airtm?.rows[0].price_value)
+      : valor_airtm = 0;
+
+    return { dolarToday: valor_dt, BCV: valor_bcv, airTM: valor_airtm };
   } catch (error) {
     console.log(error);
   }
-  return { dolarToday: -1, BCV: -1 };
+  return { dolarToday: -1, BCV: -1, airTM: -1 };
 }

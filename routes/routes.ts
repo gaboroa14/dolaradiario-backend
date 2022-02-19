@@ -12,7 +12,7 @@ router
   .get("/main", getIndex)
   .get("/history", getHistory)
   .get("/", (ctx) => {
-    ctx.response.body = "¿Qué se te perdió, cachorro? Si quieres ver el precio del dólar entra a https://dolaradiar.io jiji"
+    ctx.response.body = "¿Qué se te perdió, cachorro? Si quieres ver el precio del dólar entra a https://dolaradiario.netlify.app jiji"
   });
 
 export default router;
