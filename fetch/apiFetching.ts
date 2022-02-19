@@ -1,8 +1,8 @@
-import { DOLAR_TODAY_API, ID, AIRTM_API } from "../config/config.ts";
+import { AIRTM_API, DOLAR_TODAY_API, ID } from "../config/config.ts";
 import {
+  getLastAirTMPrice,
   getLastMonitorDolarPrice,
   getLastPetroPrice,
-  getLastAirTMPrice,
   getLastPrices,
   insertNewPrice,
 } from "../repositories/pricesRepository.ts";
@@ -20,7 +20,16 @@ const params = {
 
 const fetchAPI = () => {
   console.log(
-    `${new Date().toLocaleString("en-US", {timeZone: "America/Caracas", day: "numeric", month: "numeric", year: "numeric", hour: "numeric", minute: "numeric"})} | checking for new DolarToday, BCV, MonitorDolar and Petro prices...`,
+    `${
+      new Date().toLocaleString("en-US", {
+        timeZone: "America/Caracas",
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      })
+    } | checking for new DolarToday, BCV, MonitorDolar and Petro prices...`,
   );
   let precio: string = "";
   try {
@@ -28,29 +37,27 @@ const fetchAPI = () => {
     atm.then((response) => {
       return response.json();
     }).then(async (data) => {
-      try{
-        const old_price = await getLastAirTMPrice();
+      const old_price = await getLastAirTMPrice();
       const airTMNew: number = parseFloat(data?.buy);
-      old_price['airtm'] !== airTMNew ? 
-      await insertNewPrice(
-        new Price(
-          0,
-          airTMNew,
-          ID.AIRTM,
-          new Date(),
-          'a'
+      old_price["airtm"] !== airTMNew
+        ? await insertNewPrice(
+          new Price(
+            0,
+            airTMNew,
+            ID.AIRTM,
+            new Date(),
+            "a",
+          ),
         )
-      ) : console.log("AirTM is up to date"); 
-    } catch (error) {
+        : console.log("AirTM is up to date");
+    }).catch((error) => {
       console.log("AirTM is down");
       console.log(error);
-    }
-    })
+    });
     const dt: Promise<Response> = fetch(DOLAR_TODAY_API);
     dt.then((response) => {
       return response.json();
     }).then(async (data) => {
-      try {
         const old_prices = await getLastPrices();
         const dolarTodayNew: number = parseFloat(data?.USD.transferencia);
         const BCVNew: number = parseFloat(data?.USD.promedio_real);
@@ -76,10 +83,9 @@ const fetchAPI = () => {
             ),
           )
           : console.log("BCV is up to date");
-      } catch (error) {
-        console.log("DolarToday API is down");
-        console.log(error);
-      }
+    }).catch((error) => {
+      console.log("DolarToday is down");
+      console.log(error);
     });
   } catch (error) {
     console.log(`error fetching BCV, DolarToday and AirTM data: ${error}`);
@@ -180,8 +186,8 @@ const fetchAPI = () => {
     );
     setTimeout(fetchAPI, time);
   } else {
-    console.log('its 10 pm, going to sleep for 9 hours...\nsee you at 7 am!!');
-    setTimeout(fetchAPI,32400000)
+    console.log("its 10 pm, going to sleep for 9 hours...\nsee you at 7 am!!");
+    setTimeout(fetchAPI, 32400000);
   }
 };
 
